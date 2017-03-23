@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Login Form</title>
+
+	<link rel="stylesheet" href="assets/demo.css">
+	<link rel="stylesheet" href="assets/form-login.css">
+
+</head>
+
+
+	<header>
+		<h1>PomoCal</h1>
+       
+    </header>
+
+
+
+    <div class="main-content">
+
+        <!-- You only need this form and the form-login.css -->
+
+        <form class="form-login" id="loginForm" method="post" action="#">
+
+            <div class="form-log-in-with-email">
+
+                <div class="form-white-background">
+
+                    <div class="form-title-row">
+                        <h1>Log in</h1>
+                    </div>
+
+                    <div class="form-row">
+                        <label>
+                            <span>Username</span>
+                            <input type="email" name="username">
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <label>
+                            <span>Password</span>
+                            <input type="password" name="password">
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <button type="submit">Log in</button>
+                    </div>
+
+                </div>
+
+                <a href="#" class="form-forgotten-password">Forgotten password &middot;</a>
+                <a href="#" class="form-create-an-account">Create an account &rarr;</a>
+
+            </div>
+
+        </form>
+
+    </div>
+<script type="text/javascript" src="assets/jquery.js"></script>
+<script type="text/javascript">
+	$(function()
+	{
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+
+		if(dd<10) {
+		    dd='0'+dd
+		} 
+
+		if(mm<10) {
+		    mm='0'+mm
+		} 
+
+		today = yyyy+'-'+mm+'-'+dd;
+		document.write(today);
+		var taskUrl = "http://37.48.67.206:88/index.php?__vtrftk=sid:2cea00f0b35e62704445ead1f49ca50253f676c1,1490300601&module=Calendar&action=Feed&start="+today+"&end="+today+"&type=ProjectTask&fieldname=Project+Task&color=%23006400&textColor=white";
+		$.get(taskUrl,function(response)
+		{	
+			try {
+				var data = JSON.parse(response);
+				console.log(data);
+			} catch(e) {
+				
+				console.log(e);
+				window.location.href='login.html';
+			}
+
+		});
+
+	});
+</script>
+</body>
+
+</html>
